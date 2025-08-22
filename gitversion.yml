@@ -1,0 +1,26 @@
+mode: ContinuousDelivery
+next-version: 0.1.0
+
+assembly-versioning-scheme: MajorMinorPatch
+assembly-file-versioning-scheme: MajorMinorPatch
+
+branches:
+  main:
+    regex: ^main$
+    increment: Patch
+  feature:
+    regex: ^features?[\/-](?<BranchName>.+)
+    increment: Inherit
+  hotfix:
+    regex: ^hotfix[/-]
+    increment: Patch
+  support:
+    regex: ^support[\/-](?<BranchName>\d+\.\d+)$
+    increment: Patch
+    is-main-branch: true
+    prevent-increment:
+      of-merged-branch: true
+    source-branches:
+      - main
+      - support
+    
